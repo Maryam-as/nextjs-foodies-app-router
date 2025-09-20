@@ -1,11 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import MainHeaderBackground from "./main-header-background";
 import logoImg from "@/assets/logo.png";
 import classes from "./main-header.module.css";
 
 export default function MainHeader() {
+  // usePathname returns the current pathname (part of the URL after the domain)
+  const path = usePathname();
+
   return (
     <>
       <MainHeaderBackground />
@@ -18,10 +22,22 @@ export default function MainHeader() {
         <nav className={classes.nav}>
           <ul>
             <li>
-              <Link href="/meals">Browse Meals</Link>
+              <Link
+                href="/meals"
+                className={
+                  path.startsWith("/meals") ? classes.active : undefined
+                }
+              >
+                Browse Meals
+              </Link>
             </li>
             <li>
-              <Link href="/community">Foodies Communities</Link>
+              <Link
+                href="/community"
+                className={path === "/community" ? classes.active : undefined}
+              >
+                Foodies Communities
+              </Link>
             </li>
           </ul>
         </nav>
