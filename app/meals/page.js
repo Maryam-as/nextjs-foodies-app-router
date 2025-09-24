@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import classes from "./page.module.css";
+import MealsGrid from "@/components/meals/meals-grid";
 
 export default function MealsPage() {
   return (
@@ -17,7 +18,9 @@ export default function MealsPage() {
           <Link href="/meals/share">Share Your Favorite Recipe</Link>
         </p>
       </header>
-      <main></main>
+      <main>
+        <MealsGrid meals={[]} />
+      </main>
     </>
   );
 }
