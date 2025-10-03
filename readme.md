@@ -16,13 +16,14 @@ Check out the live app here: [https://nextjs-foodies-app-router.vercel.app/](htt
 - Image preview before uploading.
 - Smooth UX with preserved form state on validation errors.
 - Dynamic metadata for pages for SEO-friendly titles and descriptions.
+- Uploaded images are stored in **Cloudinary**, ensuring persistence across deployments.
 
 ## Tech Stack
 
 - Next.js 13+ (App Router)
 - React 18+
 - SQLite (via `better-sqlite3`)
-- Node.js File System API for image storage
+- Cloudinary for image storage
 - CSS Modules for styling
 
 ## Getting Started
@@ -40,10 +41,20 @@ Check out the live app here: [https://nextjs-foodies-app-router.vercel.app/](htt
    npm install
    ```
 
-3. Run the development server:
+3. Set up environment variables for Cloudinary in a `.env.local` file:
+
+   ```env
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   ```
+
+4. Run the development server:
+
    ```bash
    npm run dev
    ```
+
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deployment
@@ -51,16 +62,13 @@ Check out the live app here: [https://nextjs-foodies-app-router.vercel.app/](htt
 This app is ready to deploy on [Vercel](https://vercel.com/) (already live!).  
 Simply connect your GitHub repository to Vercel and it will handle the rest.
 
+Cloudinary ensures that user-uploaded images remain accessible even after deployments or server resets.
+
 ## Feature Improvements
 
-Currently, uploaded images by users are stored in the `/public` folder.  
-This means that when deploying to platforms like Vercel, images may not persist between deployments.
-
-Future improvements could include:
-
-- Storing uploaded images in a cloud file storage solution such as **AWS S3**, **Google Cloud Storage**, or **Cloudinary**.
-- Updating the `saveMeal` function to upload images to the cloud and save the returned URL in the database.
-- This ensures that user-uploaded images are reliably accessible even after deployments or server resets.
+- All user-uploaded images are uploaded to the Cloudinary `foodies_app` folder.
+- `saveMeal` function handles temporary local storage, Cloudinary upload, and database insertion seamlessly.
+- Cloud-based image storage improves reliability and scalability compared to local `/public` storage.
 
 ## Contributing
 
