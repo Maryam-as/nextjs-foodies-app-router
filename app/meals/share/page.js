@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useFormState } from "react-dom"; // ⛔ deprecated
+import { useActionState } from "react"; // ✅ new API
 
 import ImagePicker from "@/components/meals/image-picker";
 import classes from "./page.module.css";
@@ -11,7 +12,8 @@ export default function ShareMealPage() {
   // useFormState connects the server action (shareMeal) with the form
   // - `state`: contains the latest returned state from the server action (e.g., validation messages)
   // - `formAction`: function passed to the form's action attribute to handle submission
-  const [state, formAction] = useFormState(shareMeal, {
+  // `useActionState` works just like `useFormState`
+  const [state, formAction] = useActionState(shareMeal, {
     message: null,
     values: null,
   });
